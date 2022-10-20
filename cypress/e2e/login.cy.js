@@ -1,51 +1,60 @@
 /// <reference types="Cypress" />
 
-describe('Login test cases', () => {
-    it('Go to gallery page', () => {
-        cy.visit('')
-    })
 
-    it('Go to login page', () => {
-        cy.get("a[href='/login']").click()
+const locators = require('../fixtures/locators.json')
+import { faker } from '@faker-js/faker';
+
+describe('Login test cases', () => {
+    beforeEach('Go to gallery page and click on login button', () => {
+        cy.visit(''),
+        cy.get(locators.header.loginButton).click()
     })
+    //   it('Go to gallery page', () => {
+    //      cy.visit('')
+    //  })
+
+    //  it('Go to login page', () => {
+    //      cy.get(locators.header.loginButton).click()
+    //  })
 
     it('Login with valid credentials', () => {
-        cy.get('#email').type('danilo.todorovic@vivifyideas.com')
-        cy.get('#password').type('Password1')
-        cy.get("button[type='submit']").click()
+        cy.get(locators.login.emailInput).type('danilo.todorovic@vivifyideas.com'),
+        cy.get(locators.login.passwordInput).type('Password1'),
+        cy.get(locators.login.submitButton).click(),
+        cy.get(locators.header.logoutButton).click()
     })
-    it('Logout',() => {
-        cy.get('a[role="button "]').click()
-    })
+    // it('Logout',() => {
+    //     cy.get(locators.header.logoutButton).click()
+    // })
 
     it('Go to login page', () => {
-        cy.get("a[href='/login']").click()
+        cy.get(locators.header.loginButton).click()
     })
 
     it('Login with invalid email', () => {
-        cy.get('#email').clear().type('a22.com')
-        cy.get('#password').clear().type('Password1')
-        cy.get("button[type='submit']").click()
+        cy.get(locators.login.emailInput).clear().type(faker.internet.email())
+        cy.get(locators.login.passwordInput).clear().type('Password1')
+        cy.get(locators.login.submitButton).click()
     })
    
 
-    it('Login with invalid password', () => {
-        cy.get('#email').clear().type('danilo.todorovic@vivifyideas.com')
-        cy.get('#password').clear().type('123456')
-        cy.get("button[type='submit']").click()
+    it.only('Login with invalid password', () => {
+        cy.get(locators.login.emailInput).clear().type('danilo.todorovic@vivifyideas.com')
+        cy.get(locators.login.passwordInput).clear().type(faker.internet.password())
+        cy.get(locators.login.submitButton).click()
             })
            
    it('Login with invalid password', () => {
-          cy.get('#email').clear().type('danilo.todorovic@vivifyideas.com')
-          cy.get('#password').clear().type('123456')
-          cy.get("button[type='submit']").click() })
+          cy.get(locators.login.emailInput).clear().type('danilo.todorovic@vivifyideas.com')
+          cy.get(locators.login.passwordInput).clear().type('123456')
+          cy.get(locators.login.submitButton).click() })
           
    it('Login with no password', () => {
-          cy.get('#email').clear().type('danilo.todorovic@vivifyideas.com')
-          cy.get("button[type='submit']").click() })   
+          cy.get(locators.login.emailInput).clear().type('danilo.todorovic@vivifyideas.com')
+          cy.get(locators.login.submitButton).click() })   
           
     it('Login with no email no password', () => {
-        cy.get('#email').clear()
-        cy.get('#password').clear()
-        cy.get("button[type='submit']").click() } )    
+        cy.get(locators.login.emailInput).clear()
+        cy.get(locators.login.passwordInput).clear()
+        cy.get(locators.login.submitButton).click() } )    
 })
