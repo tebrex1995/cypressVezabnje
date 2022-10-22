@@ -25,8 +25,8 @@ describe('Login test cases', () => {
     })
    
 
-    it.only('Login with invalid password', () => {
-        loginPage.login('danilo.todorovic@vivifyideas.com', faker.internet.password)
+    it('Login with invalid password', () => {
+        loginPage.login('danilo.todorovic@vivifyideas.com', faker.internet.password())
      })
 
            
