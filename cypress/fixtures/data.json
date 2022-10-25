@@ -1,0 +1,26 @@
+{
+    "headers": {
+        "allGalleries": "All Galleries",
+        "login": "Please login"
+    },
+
+    "login":{
+        "validEmail": "danilo.todorovic@vivifyideas.com",
+        "validPassword": "Password1",
+        "passwordLessThan8Characters": 123456
+    },
+
+    "register": {
+        "validFirstName": "Aleksa",
+        "invalidFirstName": "  ",
+        "validLastName": "Tvrdisic",
+        "invalidLastName": "  ",
+        "validPassword": "aleksa123456",
+        "invalidPassword": "aleksa",
+        "invalidEmail": "aleksa.com"
+        
+
+    }
+
+    
+}

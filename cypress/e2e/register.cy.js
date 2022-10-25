@@ -1,7 +1,8 @@
 /// <reference types="Cypress" />
 
 const locators = require('../fixtures/locators.json')
-import { faker } from '@faker-js/faker';
+import { faker } from '@faker-js/faker'
+import data from '../fixtures/data.json'
 
 describe('Register test cases', () => {
 
@@ -11,19 +12,12 @@ describe('Register test cases', () => {
 	})
 	
 
-	// it('Go to gallery page', () => {
-	// 	cy.visit('');
-	// });
-
-	// it('Go to register page', () => {
-	// 	cy.get("a[href='/register']").click();
-	// });
 
 	it('Invalid First name', () => {
-		cy.get(locators.register.firstName).type('  ');
-		cy.get(locators.register.lastNameInput).type('Test');
-		cy.get(locators.register.emailInput).type('test@123456.com');
-		cy.get(locators.register.passwordInput).type('aleksa1995');
+		cy.get(locators.register.firstName).type(data.register.invalidFirstName);
+		cy.get(locators.register.lastNameInput).type(data.register.validLastName);
+		cy.get(locators.register.emailInput).type(faker.internet.email);
+		cy.get(locators.register.passwordInput).type(data.register.validPassword);
 		cy.get(locators.register.passwordConfirmationInput).type('aleksa1995');
 		cy.get(locators.header.checkboxInput).check();
 		cy.get(locators.header.registerSubmitButton).click();
@@ -72,7 +66,7 @@ describe('Register test cases', () => {
 	it('Register successfully', () => {
 		cy.get(locators.register.firstName).clear().type('Test');
 		cy.get(locators.register.lastNameInput).clear().type('Al');
-		cy.get(locators.register.emailInput).clear().type('test1234215@gmail.com');
+		cy.get(locators.register.emailInput).clear().type(faker.internet.email);
 		cy.get(locators.register.passwordInput).clear().type('aleksa1995');
 		cy.get(locators.register.passwordConfirmationInput).clear().type('aleksa1995');
 		cy.get(locators.header.checkboxInput).check();

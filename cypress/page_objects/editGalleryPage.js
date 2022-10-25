@@ -38,4 +38,4 @@ class EditGalleryPage {
 }
 
 
-export const editGalleryPage = new EditGalleryPage
+export const editGalleryPage = new EditGalleryPage()

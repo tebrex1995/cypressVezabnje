@@ -43,4 +43,4 @@ class CreateGalleryPage {
     
 }
 
-export const createGalleryPage = new CreateGalleryPage
+export const createGalleryPage = new CreateGalleryPage()

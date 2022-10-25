@@ -19,4 +19,4 @@ class DeleteGalleryPage {
 
 }
 
-export const deleteGalleryPage = new DeleteGalleryPage
+export const deleteGalleryPage = new DeleteGalleryPage()
