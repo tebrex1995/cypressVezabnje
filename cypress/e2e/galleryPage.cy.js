@@ -24,6 +24,7 @@ describe ('Create gallery test cases', () => {
     createGalleryPage.createGallery(faker.animal.bird(), faker.lorem.sentence(), faker.image.business()+".jpg")
     cy.url('').should('not.contain', '/create')
     general.newGallery.should('be.visible')
+
   })
 
   it("Edit gallery title", () => {
@@ -33,9 +34,12 @@ describe ('Create gallery test cases', () => {
     
 
 })
-  it('should delete gallery', () => {
+
+
+  it('Should delete gallery', () => {
     deleteGalleryPage.deleteNewGallery()
     cy.url().should('not.contain', '/galleries')
+    general.editedGallery.should('not.contain', general.newGallery)
 
   
    

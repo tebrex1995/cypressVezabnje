@@ -17,7 +17,8 @@
         "invalidLastName": "  ",
         "validPassword": "aleksa123456",
         "invalidPassword": "aleksa",
-        "invalidEmail": "aleksa.com"
+        "invalidEmail": "aleksa.com",
+        "uncheckedBox": "The terms and conditions must be accepted."
         
 
     }

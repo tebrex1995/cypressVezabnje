@@ -23,6 +23,9 @@ class Navigation {
     get deleteButton(){
         return cy.get(".btn-custom").eq(0)
     }
+    get registerButton(){
+        return cy.get("a[href='/register']")
+    }
     
     clickOnLoginButton(){
         this.loginButton.click()

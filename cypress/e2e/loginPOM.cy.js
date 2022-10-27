@@ -43,7 +43,7 @@ describe('Login test cases', () => {
    
 
     it('Login with invalid password', () => {
-        loginPage.login( data.login.validEmail, data.login.passwordLessThan8Characters())
+        loginPage.login( data.login.validEmail, data.login.passwordLessThan8Characters)
         general.errorMessage.should('be.visible')
             .and('have.text','Bad Credentials')
 
@@ -58,14 +58,12 @@ describe('Login test cases', () => {
           
    it('Login with no password', () => {
           loginPage.login(data.login.validEmail ,"{backspace}")
-          general.errorMessage.should('be.visible')
-            .and('have.text','Bad Credentials')
+          
         })
           
           
     it('Login with no email no password', () => {
         loginPage.login("{backspace}","{backspace}") 
-        general.errorMessage.should('be.visible')
-        .and('have.text','Bad Credentials')
+       
     })
 })

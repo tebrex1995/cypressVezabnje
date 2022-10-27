@@ -18,6 +18,7 @@ get editedGallery() {
 
 
 
+
 }
 
 export const general = new General()
