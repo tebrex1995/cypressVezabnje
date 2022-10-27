@@ -4,7 +4,7 @@ class EditGalleryPage {
     get myGalleryButton(){
         return cy.get("a[href='/my-galleries']")
        }
-    
+       
 
     get galleryEditButton(){
         return cy.get(".btn-custom").eq(1)

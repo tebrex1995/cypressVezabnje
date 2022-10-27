@@ -20,23 +20,46 @@ describe('Login test cases', () => {
     })
    
     it('Login with valid credentials', () => {
+        cy.intercept('POST', 'https://gallery-api.vivifyideas.com/api/auth/login').as('validLogin')
+        cy.intercept('POST', 'https://gallery-api.vivifyideas.com/api/auth/logout').as('logout')
         loginPage.login(data.login.validEmail,data.login.validPassword)
         navigation.loginButton.should('not.exist')
         navigation.logoutButton.should('exist')
         navigation.clickOnLogOutButton()
         navigation.logoutButton.should('not.exist')
         navigation.loginButton.should('exist')
+        cy.wait('@validLogin').then(intercept => {
+            console.log(intercept)
+            expect(intercept.response.statusCode).to.eq(200)
+            expect(intercept.request.body.email).to.eq(data.login.validEmail)
+            expect(intercept.request.body.password).to.eq(data.login.validPassword)
+        })
+
+        cy.wait('@logout').its('response').then(response => {
+            console.log(response)
+            expect(response.statusCode).to.eq(200)
+            expect(response.body.message).to.eq('Successfully logged out')
+        })
     })
     
     
 
-    it('Login with invalid email', () => {
+    it.only('Login with invalid email', () => {
+        cy.intercept('POST', 'https://gallery-api.vivifyideas.com/api/auth/login').as('invalidLogin')
        loginPage.login(faker.internet.email(), data.login.validPassword)
        navigation.clickOnLoginButton()
        general.errorMessage.should('be.visible')
         .and('have.text','Bad Credentials')
         .and('have.css', 'background-color', 'rgb(248, 215, 218)')
         .and('have.css', 'color', 'rgb(114, 28, 36)')
+        cy.wait('@invalidLogin').then(intercept => {
+            console.log(intercept)
+            expect(intercept.response.statusCode).to.eq(401)
+            expect(intercept.response.statusMessage).to.eq('Unauthorized')
+            expect(intercept.request.body.password).to.eq(data.login.validPassword)
+
+        
+        })
 
 
     })
