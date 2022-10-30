@@ -28,6 +28,8 @@ describe('Login BE', () => {
         cy.visit('')
         navigation.logoutButton.should('exist')
     })
+
+
     
     it('Logout BE', () => {
 

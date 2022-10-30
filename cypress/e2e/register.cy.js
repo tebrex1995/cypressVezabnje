@@ -24,14 +24,14 @@ describe('Register test cases', () => {
 			console.log(intercept)
 			expect(intercept.response.statusCode).to.eq(422)
 			expect(intercept.response.statusMessage).to.eq("Unprocessable Entity")
-			expect(intercept.response.body.errors.first_Name.length[0]).to.eq("The first name field is required.")
+			expect(intercept.response.body.errors.first_name[0]).to.eq("The first name field is required.")
 			expect(intercept.response.body.message).to.eq("The given data was invalid.")
 		})
 		
 	
 	});
 	
-	it('Invalid Last name', () => {
+	it.only('Invalid Last name', () => {
 		cy.intercept('POST', 'https://gallery-api.vivifyideas.com/api/auth/register').as('invalidRegister')
 		register.RegisterAccount(faker.name.firstName(), data.register.invalidLastName, faker.internet.email(), data.register.validPassword, data.register.validPassword)
 		cy.url().should('contain', '/register')
@@ -40,6 +40,7 @@ describe('Register test cases', () => {
 			expect(intercept.response.statusCode).to.eq(422)
 			expect(intercept.response.statusMessage).to.eq('Unprocessable Entity')
 			expect(intercept.response.body.message).to.eq("The given data was invalid.")
+			expect(intercept.response.body.errors.last_name[0]).to.eq("The last name field is required.")
 		})
 	}),
 	it('Invalid email', () => {

@@ -20,7 +20,7 @@ describe ('Create gallery test cases', () => {
         navigation.clickOnCreateGalleryButton()
       })
     
-  it("Create gallery", () => {
+  it.only("Create gallery", () => {
     cy.intercept('POST', 'https://gallery-api.vivifyideas.com/api/galleries').as('createGallery')
     createGalleryPage.createGallery(faker.animal.bird(), faker.lorem.sentence(), faker.image.business()+".jpg")
     cy.url('').should('not.contain', '/create')
@@ -32,7 +32,7 @@ describe ('Create gallery test cases', () => {
       expect(intercept.response.statusMessage).to.eq('Created')
       expect(intercept.response.body.title).to.eq(intercept.request.body.title)
       expect(intercept.response.body.description).to.eq(intercept.request.body.description)
-      // expect(intercept.response.body.images).to.eq(intercept.request.body.images.length.includes(''))
+      expect(intercept.request.body.images[0]).to.eq("https://loremflickr.com/640/480/business.jpg")
     })
 
   })
