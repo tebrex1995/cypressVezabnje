@@ -5,7 +5,9 @@ class EditGalleryPage {
         return cy.get("a[href='/my-galleries']")
        }
        
-
+       get selectNewGallery(){
+        return cy.get("a[href='/galleries/1011']")
+    }
     get galleryEditButton(){
         return cy.get(".btn-custom").eq(1)
     }
@@ -19,9 +21,9 @@ class EditGalleryPage {
         return cy.get("button[type='submit']").eq(0)
     }
 
-    get selectNewGallery(){
-        return cy.get(".box-title").eq(0)
-    }
+    // get selectNewGallery(){
+    //     return cy.get(".box-title").eq(1)
+    // }
 
     
 

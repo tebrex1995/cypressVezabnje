@@ -44,7 +44,7 @@ describe('Login test cases', () => {
     
     
 
-    it.only('Login with invalid email', () => {
+    it('Login with invalid email', () => {
         cy.intercept('POST', 'https://gallery-api.vivifyideas.com/api/auth/login').as('invalidLogin')
        loginPage.login(faker.internet.email(), data.login.validPassword)
        navigation.clickOnLoginButton()
@@ -65,10 +65,19 @@ describe('Login test cases', () => {
     })
    
 
-    it('Login with invalid password', () => {
+    it('Login with password less than 8 characters', () => {
+        cy.intercept('POST', 'https://gallery-api.vivifyideas.com/api/auth/login').as('invalidLogin')
         loginPage.login( data.login.validEmail, data.login.passwordLessThan8Characters)
         general.errorMessage.should('be.visible')
             .and('have.text','Bad Credentials')
+            cy.wait('@invalidLogin').then(intercept => {
+                console.log(intercept)
+                expect(intercept.response.statusCode).to.equal(401)
+                expect(intercept.response.statusMessage).to.eq('Unauthorized')
+                expect(intercept.response.body.error).to.eq('Unauthorized')
+            
+
+            })
 
      })
 
@@ -81,6 +90,8 @@ describe('Login test cases', () => {
           
    it('Login with no password', () => {
           loginPage.login(data.login.validEmail ,"{backspace}")
+          
+
           
         })
           
